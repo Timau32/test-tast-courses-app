@@ -1,23 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CoursesList, Spinner, Tabs } from 'Components';
 import { ICourse, ITabs } from 'interfaces';
 import api from 'api/api';
 import classes from './Course.module.scss';
+import { message } from 'antd';
+import axios, { CancelTokenSource } from 'axios';
 
 const Courses = () => {
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<ICourse[]>([]);
   const [tabs, setTabs] = useState<ITabs[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const sourceRef = useRef<CancelTokenSource>();
 
   useEffect(() => {
     fetchCourses();
+
+    return () => sourceRef.current?.cancel();
   }, []);
 
   const fetchCourses = async () => {
     try {
       setIsLoading(true);
-      const response = await api.getCourses();
+      sourceRef.current = axios.CancelToken.source();
+      const response = await api.getCourses(sourceRef.current.token);
       const tags = response.data.reduce((acc: string[], item: ICourse) => {
         const selectedTags = item.tags.map((tag) => tag);
 
@@ -40,7 +46,10 @@ const Courses = () => {
       setTabs(transformedToTabs);
       setCourses(response.data);
       setFilteredCourses(response.data);
-    } catch (err) {
+    } catch (err: any) {
+      if (err.message !== 'Aborted') {
+        message.error('Нуспешная попытка загрузки данных. Проверьте подключение к интернету и попробуйте позже');
+      }
     } finally {
       setIsLoading(false);
     }
