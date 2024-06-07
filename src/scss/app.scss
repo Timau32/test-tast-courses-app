@@ -1,0 +1,9 @@
+@import "~antd/dist/reset.css";
+@import "./libs/normalize";
+@import "./variables/colors.module.scss";
+
+.ant-card {
+  box-shadow: none !important;
+}
+
+

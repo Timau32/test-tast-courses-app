@@ -1,0 +1,35 @@
+.list {
+  display: flex;
+  gap: 18px;
+  row-gap: 18px;
+  flex-wrap: wrap;
+  width: calc(100% - 262px - 18px);
+
+  &_item {
+    border-radius: 18px;
+    overflow: hidden;
+    width: calc(33.3% - 18px);
+    box-shadow: 0 10px 13px -4px #23235f30;
+    height: fit-content;
+
+    &_holder {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 162px;
+    }
+
+    img {
+      width: 144px;
+      height: 144px;
+      object-fit: contain;
+    }
+
+    h2 {
+      font-size: 18px;
+      padding: 12px 18px 18px 18px;
+      font-weight: 800;
+    }
+  }
+}

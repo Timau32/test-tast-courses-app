@@ -1,0 +1,14 @@
+$primary100: #5fbf77;
+$hover100: #f7f1fe;
+
+$textColor: #39414b;
+$shadowColor: #23235f30;
+$borderColor: #cfcfe4;
+
+:export {
+  primary100: $primary100;
+  hover100: $hover100;
+  textColor: $textColor;
+  shadowColor: $shadowColor;
+  borderColor: $borderColor;
+}

@@ -1,0 +1,21 @@
+@import "../../scss/variables/colors.module.scss";
+
+.tabs{
+    width: 262px;
+    border: 1px solid $borderColor;
+    border-radius: 18px;
+    padding: 12px;
+    height: fit-content;
+
+    &_item{
+        cursor: pointer;
+        font-weight: 800;
+        padding: 12px;
+    }
+
+    &_item.tabs_active{
+        background-color: $primary100;
+        border-radius: 12px;
+        color: #fff;
+    }
+}
